@@ -5,7 +5,14 @@ export default class CartService {
     }
 
     getCart = async (cid)=>{
-        return await this.repository.getCartById(cid)
+
+        const cart = await this.repository.getCartById(cid)
+
+        if(!cart){
+            throw new Error("Cart not found")
+        }
+
+        return cart
     }
 
     createCart = async ()=>{
@@ -15,6 +22,10 @@ export default class CartService {
     addProductToCart = async (cid,pid)=>{
 
         const cart = await this.repository.getCartById(cid)
+
+        if(!cart){
+            throw new Error("Cart not found")
+        }
 
         const productIndex = cart.products.findIndex(
             p => p.product.toString() === pid
@@ -41,6 +52,10 @@ export default class CartService {
 
         const cart = await this.repository.getCartById(cid)
 
+        if(!cart){
+            throw new Error("Cart not found")
+        }
+
         cart.products = cart.products.filter(
             p => p.product.toString() !== pid
         )
@@ -50,12 +65,23 @@ export default class CartService {
     }
 
     clearCart = async (cid)=>{
+
+        const cart = await this.repository.getCartById(cid)
+
+        if(!cart){
+            throw new Error("Cart not found")
+        }
+
         return await this.repository.updateCart(cid,{ products: [] })
     }
 
     updateProductQuantity = async (cid,pid,quantity)=>{
 
         const cart = await this.repository.getCartById(cid)
+
+        if(!cart){
+            throw new Error("Cart not found")
+        }
 
         const product = cart.products.find(
             p => p.product.toString() === pid
@@ -72,6 +98,13 @@ export default class CartService {
     }
 
     purchaseCart = async (cid)=>{
+
+        const cart = await this.repository.getCartById(cid)
+
+        if(!cart){
+            throw new Error("Cart not found")
+        }
+
         return {
             message: "Purchase simulated successfully"
         }
