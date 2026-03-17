@@ -34,18 +34,18 @@ export default class CartService {
         if(productIndex !== -1){
 
             cart.products[productIndex].quantity += 1
-
-        }else{
-
+        } else {
             cart.products.push({
                 product: pid,
                 quantity: 1
+            
             })
-
+            
         }
 
-        return await this.repository.updateCart(cid,cart)
+        await this.repository.updateCart(cid,cart)
 
+        return await this.repository.getCartById(cid)
     }
 
     removeProductFromCart = async (cid,pid)=>{
@@ -60,8 +60,9 @@ export default class CartService {
             p => p.product.toString() !== pid
         )
 
-        return await this.repository.updateCart(cid,cart)
+        await this.repository.updateCart(cid,cart)
 
+        return await this.repository.getCartById(cid)
     }
 
     clearCart = async (cid)=>{
@@ -72,7 +73,9 @@ export default class CartService {
             throw new Error("Cart not found")
         }
 
-        return await this.repository.updateCart(cid,{ products: [] })
+        await this.repository.updateCart(cid,{ products: [] })
+
+        return await this.repository.getCartById(cid)
     }
 
     updateProductQuantity = async (cid,pid,quantity)=>{
@@ -93,8 +96,9 @@ export default class CartService {
 
         product.quantity = quantity
 
-        return await this.repository.updateCart(cid,cart)
+        await this.repository.updateCart(cid,cart)
 
+        return await this.repository.getCartById(cid)
     }
 
     purchaseCart = async (cid)=>{
