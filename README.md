@@ -1,226 +1,183 @@
-# Backend Ecommerce API
+# Backend Ecommerce API - Final Project
 
-Este proyecto es la entrega final del curso de Backend.  
-Se trata de un servidor desarrollado con Node.js y Express que simula el funcionamiento básico de un ecommerce.
+## Descripción
 
-El sistema permite gestionar usuarios, productos, carritos de compra y realizar compras, además de implementar autenticación con JWT, manejo de roles y recuperación de contraseña por email.
+Proyecto backend desarrollado con Node.js y Express como entrega final del curso de Backend.
 
----
+El proyecto incluye:
 
-## Tecnologías utilizadas
-
-- Node.js
-- Express
-- MongoDB
-- Mongoose
-- Passport
-- JWT
-- Nodemailer
-- Handlebars
-- Socket.io
+* API REST
+* Swagger Documentation
+* Functional Testing con Jest y Supertest
+* Dockerización completa
+* Imagen pública en DockerHub
 
 ---
 
-## Instalación del proyecto
+# Tecnologías utilizadas
 
-1. Clonar el repositorio
+* Node.js
+* Express
+* Jest
+* Supertest
+* Swagger
+* Docker
+* Handlebars
+* Socket.io
 
+---
 
-git clone https://github.com/Emacord/BackendCursoDos.git
+# Repositorio GitHub
 
+https://github.com/Emacord/BackendFinalDocker
 
-2. Entrar en la carpeta del proyecto
+---
 
+# Instalación del proyecto
 
-cd BackendCursoDos
+## Clonar repositorio
 
+```bash
+git clone https://github.com/Emacord/BackendFinalDocker.git
+```
 
-3. Instalar dependencias
+## Entrar al proyecto
 
+```bash
+cd BackendFinalDocker
+```
 
+## Instalar dependencias
+
+```bash
 npm install
-
-
----
-
-## Variables de entorno
-
-Es necesario crear un archivo `.env` en la raíz del proyecto con las siguientes variables:
-
-
-PORT=8080
-
-MONGO_URL=tu_url_de_mongodb
-
-JWT_SECRET=jwtSecret
-
-MAIL_USER=tu_email@gmail.com
-
-MAIL_PASS=tu_app_password
-
-
-Para el envío de correos se utiliza Gmail, por lo que es necesario generar una **App Password** en la configuración de seguridad de la cuenta de Google.
+```
 
 ---
 
-## Ejecutar el servidor
+# Ejecutar el proyecto
 
-Para iniciar el proyecto ejecutar:
+```bash
+npm run dev
+```
 
+Servidor:
 
-node src/app.js
-
-
-El servidor se ejecutará en:
-
-
+```txt
 http://localhost:8080
-
-
----
-
-## Funcionalidades principales
-
-El backend incluye las siguientes funcionalidades:
-
-- Registro y login de usuarios
-- Autenticación con JWT
-- Manejo de roles (admin / user)
-- Recuperación de contraseña mediante email
-- Gestión de productos
-- Gestión de carritos
-- Proceso de compra con generación de ticket
-- Verificación de stock al momento de comprar
+```
 
 ---
 
-## Endpoints principales
+# Swagger Documentation
 
-### Sesiones
+La documentación Swagger se encuentra disponible en:
 
-Registrar usuario
-
-
-POST /api/sessions/register
-
-
-Login
-
-
-POST /api/sessions/login
-
-
-Usuario actual
-
-
-GET /api/sessions/current
-
+```txt
+http://localhost:8080/api/docs
+```
 
 ---
 
-### Recuperación de contraseña
+# Tests Funcionales
 
-Solicitar recuperación
+Los tests funcionales fueron desarrollados para todos los endpoints del router:
 
+```txt
+adoption.router.js
+```
 
-POST /api/sessions/forgot-password
+Incluyen:
 
+* Casos de éxito
+* Casos de error
+* Validaciones
 
-Restablecer contraseña
+## Ejecutar tests
 
-
-POST /api/sessions/reset-password
-
-
----
-
-### Productos
-
-Obtener productos
-
-
-GET /api/products
-
-
-Crear producto (solo admin)
-
-
-POST /api/products
-
-
-Actualizar producto
-
-
-PUT /api/products/:pid
-
-
-Eliminar producto
-
-
-DELETE /api/products/:pid
-
+```bash
+npm test
+```
 
 ---
 
-### Carritos
+# Docker
 
-Obtener carrito
+## Construir imagen Docker
 
+```bash
+docker build -t backend-final .
+```
 
-GET /api/carts/:cid
+## Ejecutar contenedor
 
-
-Agregar producto al carrito
-
-
-POST /api/carts/:cid/product/:pid
-
-
----
-
-### Compra
-
-Realizar compra
-
-
-POST /api/carts/:cid/purchase
-
-
-Este endpoint se encarga de:
-
-- verificar el stock de los productos
-- descontar el stock correspondiente
-- generar un ticket de compra
-- devolver los productos que no pudieron comprarse por falta de stock
+```bash
+docker run -p 8080:8080 backend-final
+```
 
 ---
 
-## Arquitectura del proyecto
+# DockerHub
 
-El proyecto está organizado siguiendo una arquitectura por capas para separar responsabilidades:
+Imagen pública disponible en:
 
+https://hub.docker.com/r/gunit2/backend-final
 
+---
+
+# Arquitectura del proyecto
+
+El proyecto se encuentra organizado utilizando arquitectura por capas:
+
+```txt
 Router
 Controller
 Service
 Repository
 DAO
-MongoDB
+```
 
+También incluye:
 
-También se implementa:
-
-- DTO para evitar enviar información sensible del usuario
-- Middleware de autorización según rol
-- Estrategias de Passport para autenticación
-- Variables de entorno para configuración
+* Middleware
+* DTO
+* Swagger
+* Testing
+* Docker
 
 ---
 
-## Autor
+# Estructura del proyecto
+
+```txt
+src/
+├── config/
+├── controllers/
+├── dao/
+├── dto/
+├── middlewares/
+├── models/
+├── repositories/
+├── routes/
+├── services/
+├── utils/
+├── views/
+└── app.js
+
+test/
+└── adoption.test.js
+
+Dockerfile
+package.json
+README.md
+```
+
+---
+
+# Autor
 
 Desarrollado por:
 
 **CORDOBA EMANUEL**
 
-Entrega final del curso de Backend.
+Entrega final - Curso Backend
