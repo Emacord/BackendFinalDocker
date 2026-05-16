@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
-    "transform": {}
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
+
   },
   "jest": {
     "testEnvironment": "node"
